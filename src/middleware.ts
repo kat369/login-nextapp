@@ -11,13 +11,13 @@ export function middleware(request: NextRequest) {
 
   const token = request.cookies.get("token")?.value || "";
 
-  const admin = request.cookies.get("isAdmin")?.value || "";
+  const admin = request.cookies.get("isAdmin")?.value || "false";
 
   if (adminpath && token && admin === "false") {
     return NextResponse.redirect(new URL("/profile", request.nextUrl));
   }
 
-  if (userpath && token && admin  === "true") {
+  if (userpath && token && admin === "true") {
     return NextResponse.redirect(new URL("/adminpage", request.nextUrl));
   }
 
@@ -27,5 +27,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/profile", "/signup"],
+  matcher: ["/", "/profile", "/signup", "/adminpage"],
 };
