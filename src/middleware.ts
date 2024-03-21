@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
 
   const token = request.cookies.get("token")?.value || "";
 
-  const admin = request.cookies.get("isAdmin")?.value || "false";
+  const admin = request.cookies.get("isAdmin")?.value || "";
 
   if (adminpath && token && admin === "false") {
     return NextResponse.redirect(new URL("/profile", request.nextUrl));
