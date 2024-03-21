@@ -16,8 +16,15 @@ export default function Home() {
     try {
       const response = await axios.post("/api/users/login", user);
       console.log("Login success", response.data);
+      const isAdmin = response.data.user.isAdmin
+      console.log(isAdmin);
       alert("Login success");
-      router.push("/profile");
+      localStorage.setItem('email', user.email);
+      if(isAdmin){
+        router.push("/adminpage");
+      }else{
+        router.push("/profile");
+      }
     } catch (error: any) {
       console.log("Login failed", error.message);
       alert("Wrong Credientials");

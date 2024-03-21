@@ -14,12 +14,14 @@ function ProfilePage() {
     try {
       await axios.get("/api/users/logout");
       alert("Logout successful");
+      localStorage.removeItem('email');
       router.push("/");
     } catch (error: any) {
       console.log(error.message);
     }
   };
 
+  const userEmail = localStorage.getItem('email');
  
  
   // const getUserDetails = async () => {
@@ -35,7 +37,7 @@ function ProfilePage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h2 className="p-5 text-3xl">Profile Page</h2>
-      <h2 className="p-5 text-2xl">User logedin succesfully</h2>
+      <h2 className="p-5 text-2xl">User logedin succesfully {userEmail}</h2>
       <button
         onClick={logout}
         className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
